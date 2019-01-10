@@ -24,7 +24,7 @@ type (
 func NewMethodRepository() *MethodRepository {
 	return &MethodRepository{
 		m: sync.RWMutex{},
-		r: map[string]Metadata{},
+		r: make(map[string]Metadata),
 	}
 }
 
