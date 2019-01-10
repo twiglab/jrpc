@@ -1,7 +1,7 @@
 package jsonrpc
 
 import (
-	"encoding/json"
+	"github.com/twiglab/jsonrpc/internal/json"
 )
 
 // Unmarshal decodes JSON-RPC params.

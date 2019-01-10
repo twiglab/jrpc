@@ -3,7 +3,7 @@ package jsonrpc
 import (
 	"context"
 
-	"encoding/json"
+	"github.com/twiglab/jsonrpc/internal/json"
 )
 
 type requestIDKey struct{}

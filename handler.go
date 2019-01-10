@@ -4,7 +4,7 @@ import (
 	"context"
 	"net/http"
 
-	"encoding/json"
+	"github.com/twiglab/jsonrpc/internal/json"
 )
 
 // Handler links a method of JSON-RPC request.

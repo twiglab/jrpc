@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strings"
 
-	"encoding/json"
+	"github.com/twiglab/jsonrpc/internal/json"
 )
 
 const (

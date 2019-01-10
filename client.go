@@ -2,12 +2,13 @@ package jsonrpc
 
 import (
 	"bytes"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"net/http"
 	"reflect"
 	"strconv"
+
+	"github.com/twiglab/jsonrpc/internal/json"
 )
 
 const (
