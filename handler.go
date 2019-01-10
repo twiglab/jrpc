@@ -1,10 +1,9 @@
-package jsonrpc
+package jrpc
 
 import (
 	"context"
+	"encoding/json"
 	"net/http"
-
-	"github.com/twiglab/jsonrpc/internal/json"
 )
 
 // Handler links a method of JSON-RPC request.

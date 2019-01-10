@@ -1,11 +1,10 @@
-package jsonrpc
+package jrpc
 
 import (
 	"bytes"
+	"encoding/json"
 	"net/http"
 	"strings"
-
-	"github.com/twiglab/jsonrpc/internal/json"
 )
 
 const (

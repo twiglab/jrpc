@@ -1,8 +1,6 @@
-package jsonrpc
+package jrpc
 
-import (
-	"github.com/twiglab/jsonrpc/internal/json"
-)
+import "encoding/json"
 
 // Unmarshal decodes JSON-RPC params.
 func Unmarshal(params *json.RawMessage, dst interface{}) *Error {

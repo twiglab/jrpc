@@ -1,9 +1,8 @@
-package jsonrpc
+package jrpc
 
 import (
 	"context"
-
-	"github.com/twiglab/jsonrpc/internal/json"
+	"encoding/json"
 )
 
 type requestIDKey struct{}

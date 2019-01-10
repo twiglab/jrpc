@@ -1,10 +1,9 @@
-package jsonrpc
+package jrpc
 
 import (
+	"encoding/json"
 	"net/http"
 	"reflect"
-
-	"github.com/twiglab/jsonrpc/internal/json"
 )
 
 // A MethodReference is a reference of JSON-RPC method.
@@ -27,7 +26,9 @@ func (mr *MethodRepository) ServeDebug(w http.ResponseWriter, r *http.Request) {
 		l = append(l, makeMethodReference(k, md))
 	}
 	w.Header().Set(contentTypeKey, contentTypeValue)
-	if err := json.NewEncoder(w).Encode(l); err != nil {
+	enc := json.NewEncoder(w)
+	enc.SetIndent("", "\t")
+	if err := enc.Encode(l); err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
