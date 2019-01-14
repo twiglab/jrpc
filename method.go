@@ -6,12 +6,10 @@ import (
 )
 
 type (
-	// A MethodRepository has JSON-RPC method functions.
 	MethodRepository struct {
 		m sync.RWMutex
 		r map[string]Metadata
 	}
-	// Metadata has method meta data.
 	Metadata struct {
 		Handler Handler
 		Params  interface{}
@@ -27,8 +25,8 @@ func NewMethodRepository() *MethodRepository {
 	}
 }
 
-// TakeMethod takes jsonrpc.Func in MethodRepository.
-func (mr *MethodRepository) TakeMethod(r *Request) (Handler, *Error) {
+// TakeHandler takes jsonrpc.Func in MethodRepository.
+func (mr *MethodRepository) TakeHandler(r *Request) (Handler, *Error) {
 	if r.Method == "" || r.Version != Version {
 		return nil, ErrInvalidParams()
 	}
@@ -43,10 +41,9 @@ func (mr *MethodRepository) TakeMethod(r *Request) (Handler, *Error) {
 	return md.Handler, nil
 }
 
-// RegisterMethod registers jsonrpc.Func to MethodRepository.
-func (mr *MethodRepository) RegisterMethod(method string, h Handler, params, result interface{}) error {
+func (mr *MethodRepository) RegisterHandler(method string, h Handler, params, result interface{}) {
 	if method == "" || h == nil {
-		return errors.New("jsonrpc: method name and function should not be empty")
+		panic(errors.New("jrpc: handler name and function should not be empty"))
 	}
 	mr.m.Lock()
 	mr.r[method] = Metadata{
@@ -55,7 +52,10 @@ func (mr *MethodRepository) RegisterMethod(method string, h Handler, params, res
 		Result:  result,
 	}
 	mr.m.Unlock()
-	return nil
+}
+
+func (mr *MethodRepository) RegisterExHandler(h ExHandler) {
+	mr.RegisterHandler(h.Name(), h, h.Params(), h.Result())
 }
 
 // Methods returns registered methods.

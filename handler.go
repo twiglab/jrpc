@@ -6,12 +6,24 @@ import (
 	"net/http"
 )
 
-// Handler links a method of JSON-RPC request.
 type Handler interface {
 	ServeJSONRPC(c context.Context, params *json.RawMessage) (result interface{}, err *Error)
 }
 
-// ServeHTTP provides basic JSON-RPC handling.
+type HanlerFunc func(context.Context, *json.RawMessage) (result interface{}, err *Error)
+
+func (h HanlerFunc) ServeJSONRPC(c context.Context, params *json.RawMessage) (result interface{}, err *Error) {
+	result, err = h(c, params)
+	return
+}
+
+type ExHandler interface {
+	Handler
+	Name() string
+	Params() interface{}
+	Result() interface{}
+}
+
 func (mr *MethodRepository) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	rs, batch, err := ParseRequest(r)
@@ -42,7 +54,7 @@ func (mr *MethodRepository) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 func (mr *MethodRepository) InvokeMethod(c context.Context, r *Request) *Response {
 	var h Handler
 	res := NewResponse(r)
-	h, res.Error = mr.TakeMethod(r)
+	h, res.Error = mr.TakeHandler(r)
 	if res.Error != nil {
 		return res
 	}
