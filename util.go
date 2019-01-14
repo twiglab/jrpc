@@ -36,7 +36,7 @@ func (e *Echo) Name() string {
 	return echoName
 }
 
-func (h *Echo) Invoke(c context.Context, params *json.RawMessage) (interface{}, *Error) {
+func (h *Echo) ServeJSONRPC(c context.Context, params *json.RawMessage) (interface{}, *Error) {
 
 	var p EchoParams
 	if err := Unmarshal(params, &p); err != nil {
