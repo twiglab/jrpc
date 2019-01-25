@@ -51,3 +51,17 @@ func makeMethodReference(k string, md Metadata) *MethodReference {
 	}
 	return mr
 }
+
+type DebugHandler struct {
+	*MethodRepository
+}
+
+func Debug(mr *MethodRepository) *DebugHandler {
+	return &DebugHandler{
+		MethodRepository: mr,
+	}
+}
+
+func (d *DebugHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	d.ServeDebug(w, r)
+}
