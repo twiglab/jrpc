@@ -1,2 +1,2 @@
-# JSONRPC
-JSON-RPC 2.0
+# JRPC
+JPRC is as JSON-RPC 2.0
