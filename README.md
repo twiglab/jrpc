@@ -1,2 +1,3 @@
 # JRPC
-JPRC is as JSON-RPC 2.0
+
+JRPC是一个jsonrpc 2.0的实
