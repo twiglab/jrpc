@@ -47,16 +47,3 @@ func (h *Echo) ServeJSONRPC(c context.Context, params *json.RawMessage) (interfa
 		Message: "Hello, " + p.Name,
 	}, nil
 }
-
-/*
-func EchoClient(url string) {
-	rpc := NewClient(url)
-	r := &EchoResult{}
-
-	if err := rpc.CallFor(r, echoName, &EchoParams{Name: "world"}); err != nil {
-		log.Println(err)
-	}
-
-	fmt.Println(r.Message)
-}
-*/
